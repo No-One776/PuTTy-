@@ -1,0 +1,47 @@
+Okay, a nice easy & lazy way to use putty and vnc viewer to connect
+For you to get putty to open the VNC viewer port connection requires you to load settings
+Versus of try to just start one using commands with local and remote ports
+so using a saved session you can load & run it....
+
+
+//-------------First you have to save a putty session with the variables set that you need-----------------
+
+1. In Session -> set the server.address.location 
+2. Then go to Connections --> SSH --> Tunnels & set up your ports as normal and add it    (don't click open like normal!)
+3. Once you do that, scroll up and go back to Session
+4. Save the Session with its own ID such as EOS (for me)
+
+
+//-------------Create the Batch file/executable script (for those who don't know)--------------------------------------
+
+5. Create a text document per say, on your desktop
+6. Put the below text in it (with the modifications for you application)
+7. Once you are done..
+8. File --> Save as  ---- filename.bat and change the dropdown menu from ".txt" to "all files"
+9. and you have a batch script/executeable!
+
+//-------------Here is the script text inside you need!--------------------------------------------------
+
+-----------Version 1 w/ Described steps-----------
+
+@echo off
+//------The pass is not required and very lazy & insecure-----
+start C:\Users\%Userprofilename%\Desktop\putty.exe "<--Executable Path" -load EOS "<--Session Saved Name" -l username "<--such as rohrj" -pw N00b1sh "<--Very Insecure, working on an encrypted setup"
+TIMEOUT 2  "<--You can set this longer to give you time to type in the password"
+start C:\Users\%userprofilename%\Desktop\vncviewer.exe "<--Executable Path" localhost "<--What you want VNC viewer to open"
+
+-----------Version 2 /wo descriptive steps-----------
+
+@echo off
+start C:\Program Files\putty.exe -load EOS -l rohrj 
+TIMEOUT 2
+start C:\Program Files\vncviewer.exe localhost
+
+-----------Version 3 w/ Paths set-----------
+
+//----If you have putty and vnc set in your Path environment variables, it can look like this..----
+
+@echo off
+start putty.exe -load EOS -l rohrj 
+TIMEOUT 2
+start vncviewer.exe localhost
